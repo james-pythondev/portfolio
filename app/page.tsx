@@ -335,12 +335,46 @@ export default function Portfolio() {
       <section
         id="home"
         ref={heroRef}
-        className="relative min-h-screen pt-[64px] sm:pt-[72px] border-b border-black overflow-hidden"
+        className="relative min-h-fit lg:min-h-screen pt-[64px] sm:pt-[72px] border-b border-black overflow-hidden"
       >
-        <div className="max-w-[1340px] mx-auto px-5 sm:px-8 md:px-16 h-full grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-[calc(100vh-64px)] sm:min-h-[calc(100vh-72px)]">
+        <div className="max-w-[1340px] mx-auto px-5 sm:px-8 md:px-16 h-full grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-fit lg:min-h-[calc(100vh-72px)]">
           
+          {/* Right — Portrait (Ordered first on mobile) */}
+          <div className="relative order-first lg:order-last flex items-end justify-center bg-black/[0.03] overflow-visible lg:min-h-0 min-h-[300px] sm:min-h-[400px]">
+            {/* Grid texture */}
+            <div
+              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style={{
+                backgroundImage:
+                  "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+              }}
+            />
+
+            {/* Available badge */}
+            <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-20 flex items-center gap-2 border border-black bg-[#E6E6E6] px-3 py-1.5 sm:px-4 sm:py-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F05033] animate-pulse" />
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.4em]">Available</span>
+            </div>
+
+            {/* Portrait — zoomed & shifted so laptop breaks out */}
+            <motion.div
+              style={{ y: portraitY }}
+              className="relative z-10 w-[90%] sm:w-[100%] lg:w-[110%] h-auto mix-blend-multiply sm:-ml-[15%] mb-[-2%]"
+            >
+              <Image
+                src="/hero_cutout.png"
+                alt="James Andrew"
+                width={800}
+                height={1000}
+                className="w-full h-auto object-contain"
+                priority
+              />
+            </motion.div>
+          </div>
+
           {/* Left — Text */}
-          <div className="flex flex-col justify-center gap-6 sm:gap-12 py-6 md:py-14 lg:border-r border-black">
+          <div className="flex flex-col justify-center gap-6 sm:gap-12 py-8 sm:py-12 md:py-14 lg:border-r border-black order-last lg:order-first">
             {/* Tag + Name */}
             <div>
               <motion.p
@@ -400,39 +434,7 @@ export default function Portfolio() {
             </motion.div>
           </div>
 
-          {/* Right — Portrait */}
-          <div className="relative hidden lg:flex items-end justify-center bg-black/[0.03] overflow-visible">
-            {/* Grid texture */}
-            <div
-              className="absolute inset-0 opacity-[0.04] pointer-events-none"
-              style={{
-                backgroundImage:
-                  "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-
-            {/* Available badge */}
-            <div className="absolute top-8 left-8 z-20 flex items-center gap-2 border border-black bg-[#E6E6E6] px-4 py-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F05033] animate-pulse" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em]">Available</span>
-            </div>
-
-            {/* Portrait — zoomed & shifted so laptop breaks out */}
-            <motion.div
-              style={{ y: portraitY }}
-              className="relative z-10 w-[110%] h-auto mix-blend-multiply -ml-[15%] mb-[-2%]"
-            >
-              <Image
-                src="/hero_cutout.png"
-                alt="James Andrew"
-                width={800}
-                height={1000}
-                className="w-full h-auto object-contain"
-                priority
-              />
-            </motion.div>
-          </div>
+          {/* Large portrait is now handled above for both mobile/desktop order */}
         </div>
 
         {/* Scroll hint */}
