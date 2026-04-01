@@ -197,6 +197,7 @@ export default function Portfolio() {
         <div className="max-w-[1340px] mx-auto px-5 sm:px-8 md:px-16 flex items-center justify-between h-[64px] sm:h-[72px]">
           {/* Logo */}
           <button
+            aria-label="Go to Home section"
             onClick={() => go("home")}
             className="group flex items-center gap-3 shrink-0"
           >
@@ -235,6 +236,7 @@ export default function Portfolio() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={s.label}
                   className="w-8 h-8 flex items-center justify-center transition-all duration-300 hover:scale-125"
                   title={s.label}
                   style={{ color: s.label === "GitHub" ? "#000000" : s.color }}
@@ -255,6 +257,7 @@ export default function Portfolio() {
               Resume
             </a>
             <button
+              aria-label="Toggle mobile menu"
               onClick={() => setMenu(!menu)}
               className="lg:hidden flex flex-col gap-[5px] p-2"
             >
@@ -280,6 +283,7 @@ export default function Portfolio() {
                 <span className="font-black text-[13px] tracking-tight">JA</span>
               </div>
               <button
+                aria-label="Close mobile menu"
                 onClick={() => setMenu(false)}
                 className="text-3xl text-black/30 hover:text-black transition-colors leading-none"
               >
@@ -309,6 +313,7 @@ export default function Portfolio() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={s.label}
                     className="w-11 h-11 flex items-center justify-center rounded-full border border-black/10"
                     style={{ color: s.label === "GitHub" ? "#000000" : s.color }}
                   >
@@ -771,6 +776,7 @@ export default function Portfolio() {
                         href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={s.label}
                         initial={{ opacity: 0, scale: 0, y: 20 }}
                         animate={{
                           opacity: 1,
@@ -839,6 +845,7 @@ export default function Portfolio() {
                 href={s.h}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Visit my ${s.l} profile`}
                 className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/35 hover:text-[#F05033] transition-colors"
               >
                 {s.l}
