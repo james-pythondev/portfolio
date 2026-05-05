@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { TiltCard } from "@/components/TiltCard";
 import {
   SiPython, SiReact, SiNextdotjs, SiPostman,
   SiMongodb, SiFigma, SiGithubactions, SiTailwindcss,
@@ -126,6 +127,10 @@ const V = {
     hidden: { opacity: 0, y: 36 },
     show: { opacity: 1, y: 0, transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
   },
+  blurRise: {
+    hidden: { y: "110%", rotateX: 60, opacity: 0 },
+    show: { y: "0%", rotateX: 0, opacity: 1, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  },
 };
 
 export default function Portfolio() {
@@ -148,6 +153,11 @@ export default function Portfolio() {
   });
 
   const portraitY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const textXLeft = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const textXRight = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -347,9 +357,10 @@ export default function Portfolio() {
           {/* Right — Portrait (Ordered first on mobile) */}
           <div className="relative order-first lg:order-last flex items-end justify-center bg-black/[0.03] overflow-visible lg:min-h-0 min-h-[300px] sm:min-h-[400px]">
             {/* Grid texture */}
-            <div
-              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            <motion.div
+              className="absolute inset-[-50%] opacity-[0.04] pointer-events-none"
               style={{
+                y: gridY,
                 backgroundImage:
                   "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
                 backgroundSize: "28px 28px",
@@ -367,19 +378,26 @@ export default function Portfolio() {
               style={{ y: portraitY }}
               className="relative z-10 w-[90%] sm:w-[100%] lg:w-[110%] h-auto mix-blend-multiply sm:-ml-[15%] mb-[-2%]"
             >
-              <Image
-                src="/hero_cutout.png"
-                alt="James Andrew"
-                width={800}
-                height={1000}
-                className="w-full h-auto object-contain"
-                priority
-              />
+              <TiltCard>
+                <motion.div
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                >
+                  <Image
+                    src="/hero_cutout.png"
+                    alt="James Andrew"
+                    width={800}
+                    height={1000}
+                    className="w-full h-auto object-contain"
+                    priority
+                  />
+                </motion.div>
+              </TiltCard>
             </motion.div>
           </div>
 
           {/* Left — Text */}
-          <div className="flex flex-col justify-center gap-6 sm:gap-12 py-8 sm:py-12 md:py-14 lg:border-r border-black order-last lg:order-first">
+          <motion.div style={{ y: textY, opacity: textOpacity }} className="flex flex-col justify-center gap-6 sm:gap-12 py-8 sm:py-12 md:py-14 lg:border-r border-black order-last lg:order-first">
             {/* Tag + Name */}
             <div>
               <motion.p
@@ -394,18 +412,20 @@ export default function Portfolio() {
               <motion.div variants={V.stagger} initial="hidden" animate="show">
                 <div className="overflow-hidden py-1">
                   <motion.h1
-                    variants={V.rise}
+                    variants={V.blurRise}
+                    style={{ x: textXLeft, transformOrigin: "bottom" }}
                     className="font-black text-[16vw] sm:text-[14vw] lg:text-[10vw] leading-[0.82] text-black tracking-tighter uppercase"
-                    style={{ fontFamily: "var(--font-display, sans-serif)" }}
+                    style={{ fontFamily: "var(--font-display, sans-serif)", transformStyle: "preserve-3d" }}
                   >
                     JAMES
                   </motion.h1>
                 </div>
                 <div className="overflow-hidden py-1">
                   <motion.h1
-                    variants={V.rise}
+                    variants={V.blurRise}
+                    style={{ x: textXRight, transformOrigin: "bottom" }}
                     className="font-black text-[16vw] sm:text-[14vw] lg:text-[10vw] leading-[0.82] text-black tracking-tighter uppercase"
-                    style={{ fontFamily: "var(--font-display, sans-serif)" }}
+                    style={{ fontFamily: "var(--font-display, sans-serif)", transformStyle: "preserve-3d" }}
                   >
                     ANDREW
                   </motion.h1>
@@ -427,17 +447,19 @@ export default function Portfolio() {
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 mt-6 sm:mt-8">
                 <a
-                  href="mailto:jamesandrew2705@gmail.com"
-                  className="text-[11px] font-bold uppercase tracking-[0.35em] text-black border-b border-black pb-0.5 hover:text-[#F05033] hover:border-[#F05033] transition-all"
+                  href="https://wa.me/917339392562"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover-target group flex items-center gap-3 bg-black text-white px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.35em] hover:bg-[#25D366] hover:text-black transition-colors duration-300 rounded-sm"
                 >
-                  Get in touch →
+                  <SiWhatsapp className="text-[14px] group-hover:scale-110 transition-transform" /> Get in touch →
                 </a>
                 <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/30">
                   Based in TN, India
                 </span>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Large portrait is now handled above for both mobile/desktop order */}
         </div>
@@ -549,20 +571,21 @@ export default function Portfolio() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 border-l border-t border-black">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {SKILLS.map((s) => (
-              <div
-                key={s.name}
-                className="border-r border-b border-black p-4 sm:p-8 md:p-10 flex flex-col items-center justify-center gap-3 sm:gap-4 group hover:bg-black transition-all duration-300 cursor-default"
-              >
-                <s.icon className="text-[26px] sm:text-[32px] text-black/25 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-black group-hover:text-white transition-colors text-center">
-                  {s.name}
-                </p>
-                <p className="text-[8px] font-semibold uppercase tracking-widest text-black/25 group-hover:text-white/40 transition-all sm:opacity-0 sm:group-hover:opacity-100 text-center">
-                  {s.cat}
-                </p>
-              </div>
+              <TiltCard key={s.name}>
+                <div
+                  className="bg-[#E6E6E6] border border-black p-4 sm:p-8 md:p-10 flex flex-col items-center justify-center gap-3 sm:gap-4 group hover:bg-black transition-all duration-300 cursor-default h-full"
+                >
+                  <s.icon className="text-[26px] sm:text-[32px] text-black/25 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
+                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-black group-hover:text-white transition-colors text-center">
+                    {s.name}
+                  </p>
+                  <p className="text-[8px] font-semibold uppercase tracking-widest text-black/25 group-hover:text-white/40 transition-all sm:opacity-0 sm:group-hover:opacity-100 text-center">
+                    {s.cat}
+                  </p>
+                </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -590,47 +613,46 @@ export default function Portfolio() {
             </h2>
           </div>
 
-          <div className="border-t border-black divide-y divide-black">
+          <div className="border-t border-black pt-4 flex flex-col gap-6">
             {EXPERIENCE.map((exp) => (
-              <motion.div
-                key={exp.role}
-                whileHover={{ x: 8 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="group py-6 sm:py-12 md:py-14 grid grid-cols-1 md:grid-cols-[180px_1fr_120px] gap-4 sm:gap-6 md:gap-10 items-start cursor-default"
-              >
-                {/* Period */}
-                <p className="text-[10px] font-bold uppercase tracking-widest text-black/30 pt-1">
-                  {exp.period}
-                </p>
-
-                {/* Role + Org */}
-                <div>
-                  <h3
-                    className="font-black text-2xl sm:text-3xl md:text-4xl text-black tracking-tighter leading-none mb-2 group-hover:italic transition-all"
-                    style={{ fontFamily: "var(--font-display, sans-serif)" }}
-                  >
-                    {exp.role}
-                  </h3>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 mb-5">
-                    {exp.org} &nbsp;·&nbsp; {exp.loc}
+              <TiltCard key={exp.role}>
+                <div
+                  className="group bg-[#E6E6E6] border border-black p-6 sm:p-12 md:p-14 grid grid-cols-1 md:grid-cols-[180px_1fr_120px] gap-4 sm:gap-6 md:gap-10 items-start cursor-default hover:bg-white transition-colors"
+                >
+                  {/* Period */}
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-black/30 pt-1">
+                    {exp.period}
                   </p>
-                  <ul className="space-y-1.5">
-                    {exp.bullets.map((b, i) => (
-                      <li key={i} className="text-[13px] sm:text-[14px] text-black/50 leading-relaxed flex gap-3">
-                        <span className="text-[#F05033] mt-[3px] shrink-0">—</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
 
-                {/* Badge */}
-                <div className="md:text-right">
-                  <span className="inline-block text-[9px] font-bold uppercase tracking-[0.3em] text-[#F05033] border border-[#F05033]/30 px-3 py-1.5">
-                    {exp.badge}
-                  </span>
+                  {/* Role + Org */}
+                  <div>
+                    <h3
+                      className="font-black text-2xl sm:text-3xl md:text-4xl text-black tracking-tighter leading-none mb-2 group-hover:italic transition-all"
+                      style={{ fontFamily: "var(--font-display, sans-serif)" }}
+                    >
+                      {exp.role}
+                    </h3>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 mb-5">
+                      {exp.org} &nbsp;·&nbsp; {exp.loc}
+                    </p>
+                    <ul className="space-y-1.5">
+                      {exp.bullets.map((b, i) => (
+                        <li key={i} className="text-[13px] sm:text-[14px] text-black/50 leading-relaxed flex gap-3">
+                          <span className="text-[#F05033] mt-[3px] shrink-0">—</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Badge */}
+                  <div className="md:text-right">
+                    <span className="inline-block text-[9px] font-bold uppercase tracking-[0.3em] text-[#F05033] border border-[#F05033]/30 px-3 py-1.5 bg-white">
+                      {exp.badge}
+                    </span>
+                  </div>
                 </div>
-              </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -658,58 +680,55 @@ export default function Portfolio() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black border border-black">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {PROJECTS.map((p) => (
-              <motion.div
-                key={p.name}
-                whileHover={{ backgroundColor: "#ffffff" }}
-                transition={{ duration: 0.3 }}
-                className="group bg-[#E6E6E6] p-5 sm:p-10 md:p-14 min-h-[280px] sm:min-h-[440px] flex flex-col justify-between cursor-pointer"
-              >
-                {/* Top row */}
-                <div className="flex items-start justify-between mb-10">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/40">
-                    {p.label}
-                  </span>
-                  <div className="w-10 h-10 border border-black flex items-center justify-center text-sm group-hover:bg-[#F05033] group-hover:border-[#F05033] group-hover:text-white transition-all duration-300">
-                    ↗
-                  </div>
-                </div>
-
-                {/* Bottom content */}
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className={`text-[8px] font-bold uppercase tracking-widest px-2 py-1 ${
-                        p.status === "Live"
-                          ? "bg-black text-white"
-                          : "border border-black/30 text-black/40"
-                      }`}
-                    >
-                      {p.status}
+              <TiltCard key={p.name}>
+                <div className="group bg-[#E6E6E6] border border-black p-5 sm:p-10 md:p-14 min-h-[280px] sm:min-h-[440px] flex flex-col justify-between cursor-pointer hover:bg-white transition-colors h-full hover-target">
+                  {/* Top row */}
+                  <div className="flex items-start justify-between mb-10">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/40">
+                      {p.label}
                     </span>
+                    <div className="w-10 h-10 border border-black flex items-center justify-center text-sm group-hover:bg-[#F05033] group-hover:border-[#F05033] group-hover:text-white transition-all duration-300">
+                      ↗
+                    </div>
                   </div>
-                  <h3
-                    className="font-black text-3xl sm:text-4xl md:text-5xl text-black tracking-tighter leading-none mb-3 sm:mb-4"
-                    style={{ fontFamily: "var(--font-display, sans-serif)" }}
-                  >
-                    {p.name}
-                  </h3>
-                  <p className="text-black/50 text-[14px] sm:text-[15px] leading-relaxed mb-5 sm:mb-8 line-clamp-3">
-                    {p.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.slice(0, 3).map((t) => (
+
+                  {/* Bottom content */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
                       <span
-                        key={t}
-                        className="text-[9px] font-semibold uppercase tracking-widest bg-black/6 px-3 py-1.5 text-black/60"
+                        className={`text-[8px] font-bold uppercase tracking-widest px-2 py-1 ${
+                          p.status === "Live"
+                            ? "bg-black text-white"
+                            : "border border-black/30 text-black/40"
+                        }`}
                       >
-                        {t}
+                        {p.status}
                       </span>
-                    ))}
+                    </div>
+                    <h3
+                      className="font-black text-3xl sm:text-4xl md:text-5xl text-black tracking-tighter leading-none mb-3 sm:mb-4 group-hover:text-[#F05033] transition-colors"
+                      style={{ fontFamily: "var(--font-display, sans-serif)" }}
+                    >
+                      {p.name}
+                    </h3>
+                    <p className="text-black/50 text-[14px] sm:text-[15px] leading-relaxed mb-5 sm:mb-8 line-clamp-3">
+                      {p.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {p.tags.slice(0, 3).map((t) => (
+                        <span
+                          key={t}
+                          className="text-[9px] font-semibold uppercase tracking-widest bg-black/6 px-3 py-1.5 text-black/60"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>

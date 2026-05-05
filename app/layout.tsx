@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { CustomCursor } from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -47,7 +48,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
-      <body>{children}</body>
+      <body className="cursor-none">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }
