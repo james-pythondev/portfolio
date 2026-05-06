@@ -413,9 +413,8 @@ export default function Portfolio() {
                 <div className="overflow-hidden py-1">
                   <motion.h1
                     variants={V.blurRise}
-                    style={{ x: textXLeft, transformOrigin: "bottom" }}
                     className="font-black text-[16vw] sm:text-[14vw] lg:text-[10vw] leading-[0.82] text-black tracking-tighter uppercase"
-                    style={{ fontFamily: "var(--font-display, sans-serif)", transformStyle: "preserve-3d" }}
+                    style={{ x: textXLeft, transformOrigin: "bottom", fontFamily: "var(--font-display, sans-serif)", transformStyle: "preserve-3d" }}
                   >
                     JAMES
                   </motion.h1>
@@ -423,9 +422,8 @@ export default function Portfolio() {
                 <div className="overflow-hidden py-1">
                   <motion.h1
                     variants={V.blurRise}
-                    style={{ x: textXRight, transformOrigin: "bottom" }}
                     className="font-black text-[16vw] sm:text-[14vw] lg:text-[10vw] leading-[0.82] text-black tracking-tighter uppercase"
-                    style={{ fontFamily: "var(--font-display, sans-serif)", transformStyle: "preserve-3d" }}
+                    style={{ x: textXRight, transformOrigin: "bottom", fontFamily: "var(--font-display, sans-serif)", transformStyle: "preserve-3d" }}
                   >
                     ANDREW
                   </motion.h1>
