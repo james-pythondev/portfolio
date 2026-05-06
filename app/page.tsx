@@ -14,16 +14,16 @@ import { HiSparkles, HiScissors } from "react-icons/hi2";
 
 /* ─── DATA ─── */
 const SKILLS = [
-  { name: "Python",         icon: SiPython,        cat: "Core Language" },
-  { name: "React JS",       icon: SiReact,         cat: "Frontend"      },
-  { name: "React Native",   icon: SiReact,         cat: "Mobile"        },
-  { name: "Next.js",        icon: SiNextdotjs,     cat: "Fullstack"     },
-  { name: "REST APIs",      icon: SiPostman,       cat: "Backend"       },
-  { name: "MongoDB / SQL",  icon: SiMongodb,       cat: "Databases"     },
-  { name: "Figma",          icon: SiFigma,         cat: "Design"        },
-  { name: "CI/CD & Deploy", icon: SiGithubactions, cat: "DevOps"        },
-  { name: "Vibe Coding",    icon: HiSparkles,      cat: "Signature"     },
-  { name: "Stitch Design",  icon: HiScissors,      cat: "Design"        },
+  { name: "Web Design",     icon: SiFigma,         cat: "Creative"      },
+  { name: "Development",    icon: SiNextdotjs,     cat: "Fullstack"     },
+  { name: "SEO Optimization", icon: HiSparkles,    cat: "Performance"   },
+  { name: "Python",         icon: SiPython,        cat: "Backend"       },
+  { name: "React / Next.js", icon: SiReact,         cat: "Frontend"      },
+  { name: "Mobile Apps",    icon: SiReact,         cat: "Hybrid"        },
+  { name: "E-commerce",     icon: SiPostman,       cat: "Solutions"     },
+  { name: "Cloud & DevOps", icon: SiGithubactions, cat: "Deployment"    },
+  { name: "Maintenance",    icon: HiScissors,      cat: "Support"       },
+  { name: "Consulting",     icon: HiSparkles,      cat: "Strategy"      },
 ];
 
 const EXPERIENCE = [
@@ -54,15 +54,16 @@ const EXPERIENCE = [
     ],
   },
   {
-    role: "Freelance Web Developer",
-    org: "Self-Employed",
+    role: "Freelance Web Designer & Developer",
+    org: "Kodaikanal Digital Solutions",
     loc: "Kodaikanal",
     period: "2024 – Present",
-    badge: "Freelance",
+    badge: "Active",
     bullets: [
-      "Built tourist package website for a Kodaikanal local business (ongoing).",
-      "Developing cinematic photography portfolio with masonry gallery & lightbox.",
-      "End-to-end: design in Figma → React/Next.js build → deployment.",
+      "Providing premium web design and development services for Kodaikanal local businesses.",
+      "Building high-performance, SEO-optimized tourism and hotel booking websites.",
+      "Helping Kodaikanal entrepreneurs establish a strong digital presence with modern UI/UX.",
+      "End-to-end: Custom Design → Next.js Build → Local SEO → Maintenance.",
     ],
   },
   {
@@ -96,20 +97,20 @@ const PROJECTS = [
     status: "Live",
   },
   {
-    name: "Tourist Package Site",
-    label: "Freelance · Web",
+    name: "Kodaikanal Tourism Site",
+    label: "Web Design · Development",
     org: "Local Business",
-    desc: "Travel & tourism platform for a Kodaikanal local business — packages, booking flow, image gallery, mobile-first.",
-    tags: ["Next.js", "React", "Figma", "Tailwind"],
-    status: "Ongoing",
+    desc: "A comprehensive travel & tourism platform for a Kodaikanal business — packages, booking flow, and local SEO optimization. Mobile-first and high-conversion.",
+    tags: ["Next.js", "Local SEO", "Booking", "Tailwind"],
+    status: "Live",
   },
   {
-    name: "Photography Portfolio",
-    label: "Freelance · Web",
-    org: "Photographer Client",
-    desc: "Cinematic dark photography portfolio — masonry gallery, lightbox viewer, smooth transitions, optimised image loading.",
-    tags: ["React", "Figma", "Framer Motion", "CSS"],
-    status: "Ongoing",
+    name: "Cinematic Portfolio",
+    label: "Creative · Web",
+    org: "Kodaikanal Artist",
+    desc: "High-end photography portfolio for a local artist in Kodaikanal — masonry gallery, optimized assets, and smooth transitions.",
+    tags: ["React", "Framer Motion", "SEO", "CSS"],
+    status: "Live",
   },
 ];
 
@@ -406,7 +407,7 @@ export default function Portfolio() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-[11px] font-bold uppercase tracking-[0.5em] text-[#F05033] mb-5"
               >
-                // Fullstack Engineer
+                // Web Design & Development Kodaikanal
               </motion.p>
 
               <motion.div variants={V.stagger} initial="hidden" animate="show">
@@ -440,8 +441,7 @@ export default function Portfolio() {
             >
               <div className="w-10 h-px bg-black mb-6" />
               <p className="text-black/55 text-base sm:text-lg font-normal leading-relaxed max-w-md">
-                Fullstack Engineer & Systems Builder. Turning complex problems into
-                highly-structured, reliable digital environments.
+                Premium Web Designer & Developer in Kodaikanal. I build high-performance, SEO-optimized websites that help local businesses scale and succeed in the digital world.
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 mt-6 sm:mt-8">
                 <a
@@ -493,7 +493,7 @@ export default function Portfolio() {
               className="font-black text-[8vw] md:text-[5vw] tracking-tighter leading-none text-black uppercase"
               style={{ fontFamily: "var(--font-display, sans-serif)" }}
             >
-              Merging <em className="opacity-20">Precision</em> & Code.
+              Kodaikanal&apos;s <em className="opacity-20">Premium</em> Web Developer.
             </h2>
           </div>
 
@@ -505,13 +505,11 @@ export default function Portfolio() {
                 className="font-black text-2xl sm:text-3xl md:text-4xl tracking-tight leading-[1.0] text-black"
                 style={{ fontFamily: "var(--font-display, sans-serif)" }}
               >
-                FROM THE FLIGHT LINE TO THE COMMAND LINE — I BUILD SYSTEMS THAT NEVER FAIL.
+                FROM KODAIKANAL TO THE WORLD — I BUILD WEBSITES THAT DRIVE GROWTH.
               </p>
               <div className="space-y-4">
                 <p className="text-black/55 text-[15px] sm:text-[17px] leading-relaxed max-w-2xl">
-                  I&apos;m a Fullstack Developer and IAF Veteran based in Tamil Nadu. My background in high-fidelity flight
-                  simulation for the Indian Air Force instilled a surgical attention to detail that I now apply to scalable
-                  SaaS architecture.
+                  I&apos;m James Andrew S, a freelance web designer and developer based in Kodaikanal. I specialize in creating stunning, fast, and SEO-friendly websites for hotels, cafes, and businesses in the Princess of Hill Stations.
                 </p>
                 <div className="flex items-center gap-4 pt-2">
                   <div className="w-10 h-px bg-black/30" />
