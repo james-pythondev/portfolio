@@ -9,7 +9,14 @@
   --bg:  #E8E8E8;
   --txt: #000000;
   --acc: #F05033;
+  --acc-glow: rgba(240, 80, 51, 0.3);
   --brd: rgba(0,0,0,0.14);
+}
+
+* {
+  transition-property: color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

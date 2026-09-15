@@ -18,10 +18,20 @@ export default function Contact() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
-      className="bg-black text-white py-14 sm:py-36 md:py-48 px-5 sm:px-8 md:px-16"
+      className="relative bg-black text-white py-14 sm:py-36 md:py-48 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
-      <div className="max-w-[1340px] mx-auto">
-        <p className="text-[11px] font-bold uppercase tracking-[0.5em] text-[#F05033] mb-10">
+      {/* ── Ambient atmosphere gradient glows ── */}
+      <div
+        className="absolute -top-24 right-0 w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[140px] opacity-20 pointer-events-none transition-all duration-700"
+        style={{ background: "radial-gradient(circle, var(--acc) 0%, transparent 70%)" }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-[380px] sm:w-[520px] h-[380px] sm:h-[520px] rounded-full blur-[150px] opacity-15 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #4F46E5 0%, transparent 70%)" }}
+      />
+
+      <div className="max-w-[1340px] mx-auto relative z-10">
+        <p className="text-[11px] font-bold uppercase tracking-[0.5em] text-accent mb-10">
           {"// Next Step"}
         </p>
 
@@ -54,7 +64,7 @@ export default function Contact() {
               whileHover={{ scale: 0.97 }}
               whileTap={{ scale: 0.94 }}
               onClick={() => setShowSocials(!showSocials)}
-              className="relative z-10 inline-flex items-center gap-3 bg-[#F05033] text-white text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em] px-7 sm:px-10 py-4 sm:py-5 hover:bg-white hover:text-black transition-colors duration-300 cursor-pointer"
+              className="relative z-10 inline-flex items-center gap-3 bg-accent text-white text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em] px-7 sm:px-10 py-4 sm:py-5 hover:bg-white hover:text-black transition-colors duration-300 cursor-pointer shadow-lg"
               style={{ fontFamily: "var(--font-display, sans-serif)" }}
             >
               {showSocials ? "Close" : "Send A Message"}
@@ -131,7 +141,7 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="border border-[#F05033]/30 bg-[#F05033]/5 p-8 sm:p-12 max-w-xl"
+              className="border border-accent/40 bg-accent/10 p-8 sm:p-12 max-w-xl backdrop-blur-md"
             >
               <p
                 className="font-black text-2xl sm:text-3xl tracking-tight text-white mb-2"
@@ -139,7 +149,7 @@ export default function Contact() {
               >
                 Message sent. ✓
               </p>
-              <p className="text-white/40 text-[14px]">
+              <p className="text-white/50 text-[14px]">
                 I&apos;ll get back to you within 24 hours.
               </p>
             </motion.div>
@@ -160,13 +170,13 @@ export default function Contact() {
                   name="name"
                   required
                   placeholder="Your name"
-                  className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 px-5 py-4 text-[14px] focus:outline-none focus:border-[#F05033]/60 transition-colors"
+                  className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 px-5 py-4 text-[14px] focus:outline-none focus:border-accent/60 transition-colors"
                 />
                 <ValidationError
                   field="name"
                   prefix="Name"
                   errors={state.errors}
-                  className="text-[#F05033] text-[11px] tracking-wide"
+                  className="text-accent text-[11px] tracking-wide"
                 />
               </div>
 
@@ -184,13 +194,13 @@ export default function Contact() {
                   name="email"
                   required
                   placeholder="your@email.com"
-                  className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 px-5 py-4 text-[14px] focus:outline-none focus:border-[#F05033]/60 transition-colors"
+                  className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 px-5 py-4 text-[14px] focus:outline-none focus:border-accent/60 transition-colors"
                 />
                 <ValidationError
                   field="email"
                   prefix="Email"
                   errors={state.errors}
-                  className="text-[#F05033] text-[11px] tracking-wide"
+                  className="text-accent text-[11px] tracking-wide"
                 />
               </div>
 
@@ -208,13 +218,13 @@ export default function Contact() {
                   required
                   rows={5}
                   placeholder="Tell me about your project..."
-                  className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 px-5 py-4 text-[14px] focus:outline-none focus:border-[#F05033]/60 transition-colors resize-none"
+                  className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 px-5 py-4 text-[14px] focus:outline-none focus:border-accent/60 transition-colors resize-none"
                 />
                 <ValidationError
                   field="message"
                   prefix="Message"
                   errors={state.errors}
-                  className="text-[#F05033] text-[11px] tracking-wide"
+                  className="text-accent text-[11px] tracking-wide"
                 />
               </div>
 
@@ -222,7 +232,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="self-start inline-flex items-center gap-3 bg-[#F05033] text-white text-[11px] font-black uppercase tracking-[0.3em] px-8 py-4 hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="self-start inline-flex items-center gap-3 bg-accent text-white text-[11px] font-black uppercase tracking-[0.3em] px-8 py-4 hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 style={{ fontFamily: "var(--font-display, sans-serif)" }}
               >
                 {state.submitting ? "Sending…" : "Send Message →"}
@@ -231,7 +241,7 @@ export default function Contact() {
               {/* General form-level errors */}
               <ValidationError
                 errors={state.errors}
-                className="text-[#F05033] text-[11px] tracking-wide"
+                className="text-accent text-[11px] tracking-wide"
               />
             </form>
           )}

@@ -15,7 +15,7 @@ export default function About() {
       <div className="max-w-[1340px] mx-auto">
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-10 mb-16">
-          <span className="text-[11px] font-bold uppercase tracking-[0.45em] text-[#F05033]">{"// Bio"}</span>
+          <span className="text-[11px] font-bold uppercase tracking-[0.45em] text-accent">{"// Bio"}</span>
           <h2
             className="font-black text-[8vw] md:text-[5vw] tracking-tighter leading-none text-black uppercase"
             style={{ fontFamily: "var(--font-display, sans-serif)" }}
@@ -62,7 +62,7 @@ export default function About() {
                 <p
                   className={`text-[9px] font-bold uppercase tracking-[0.45em] mb-3 ${
                     s.accent
-                      ? "text-[#F05033]"
+                      ? "text-accent"
                       : "text-black/35 group-hover:text-white/35"
                   }`}
                 >

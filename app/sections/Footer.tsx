@@ -15,7 +15,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Visit my ${s.l} profile`}
-              className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/35 hover:text-[#F05033] transition-colors"
+              className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/35 hover:text-accent transition-colors"
             >
               {s.l}
             </a>

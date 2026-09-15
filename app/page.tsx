@@ -42,7 +42,7 @@ export default function Portfolio() {
     <MotionConfig reducedMotion="user">
       {/* ── Scroll progress bar ── */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#F05033] origin-left z-[10000] pointer-events-none"
+        className="fixed top-0 left-0 right-0 h-[2.5px] bg-accent origin-left z-[10000] pointer-events-none shadow-sm"
         style={{ scaleX: scrollYProgress }}
       />
 

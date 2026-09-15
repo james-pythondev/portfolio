@@ -17,7 +17,7 @@ export default function Experience() {
       <div className="max-w-[1340px] mx-auto">
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-10 mb-16">
-          <span className="text-[11px] font-bold uppercase tracking-[0.45em] text-[#F05033]">
+          <span className="text-[11px] font-bold uppercase tracking-[0.45em] text-accent">
             {"// History"}
           </span>
           <h2
@@ -54,7 +54,7 @@ export default function Experience() {
                         key={i}
                         className="text-[13px] sm:text-[14px] text-black/50 leading-relaxed flex gap-3"
                       >
-                        <span className="text-[#F05033] mt-[3px] shrink-0">—</span>
+                        <span className="text-accent mt-[3px] shrink-0">—</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -63,7 +63,7 @@ export default function Experience() {
 
                 {/* Badge */}
                 <div className="md:text-right">
-                  <span className="inline-block text-[9px] font-bold uppercase tracking-[0.3em] text-[#F05033] border border-[#F05033]/30 px-3 py-1.5 bg-white">
+                  <span className="inline-block text-[9px] font-bold uppercase tracking-[0.3em] text-accent border border-accent/40 px-3 py-1.5 bg-white shadow-sm">
                     {exp.badge}
                   </span>
                 </div>

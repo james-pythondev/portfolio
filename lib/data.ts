@@ -9,49 +9,99 @@ import { HiSparkles, HiScissors } from "react-icons/hi2";
 import type { IconType } from "react-icons";
 
 /* ─── TYPES ─── */
-export interface Skill       { name: string; icon: IconType; cat: string }
-export interface TechItem    { name: string; icon: IconType }
+export interface AccentTheme {
+  id: string;
+  name: string;
+  color: string;
+  glow: string;
+}
+
+export interface Skill {
+  name: string;
+  icon: IconType;
+  cat: string;
+  brandColor: string;
+}
+
+export interface TechItem {
+  name: string;
+  icon: IconType;
+  brandColor: string;
+}
+
 export interface ExperienceItem {
-  role: string; org: string; loc: string;
-  period: string; badge: string; bullets: string[];
+  role: string;
+  org: string;
+  loc: string;
+  period: string;
+  badge: string;
+  bullets: string[];
 }
+
+export interface ProjectBadgeTheme {
+  bg: string;
+  text: string;
+  border: string;
+}
+
 export interface ProjectItem {
-  name: string; label: string; org: string;
-  desc: string; tags: string[]; status: string;
-  url: string | null; github: string | null;
+  name: string;
+  label: string;
+  org: string;
+  desc: string;
+  tags: string[];
+  status: string;
+  url: string | null;
+  github: string | null;
+  accent: string;
+  badgeTheme: ProjectBadgeTheme;
 }
-export interface Social { icon: IconType; label: string; href: string; color: string }
+
+export interface Social {
+  icon: IconType;
+  label: string;
+  href: string;
+  color: string;
+}
+
+/* ─── THEME ACCENTS ─── */
+export const ACCENT_THEMES: AccentTheme[] = [
+  { id: "orange",  name: "Safety Orange", color: "#F05033", glow: "rgba(240, 80, 51, 0.35)" },
+  { id: "emerald", name: "Cyber Emerald", color: "#10B981", glow: "rgba(16, 185, 129, 0.35)" },
+  { id: "violet",  name: "Hyper Violet",  color: "#8B5CF6", glow: "rgba(139, 92, 246, 0.35)" },
+  { id: "blue",    name: "Electric Blue", color: "#3B82F6", glow: "rgba(59, 130, 246, 0.35)" },
+];
 
 /* ─── NAV ─── */
 export const NAV = ["home", "about", "skills", "experience", "projects", "contact"] as const;
 export type NavItem = (typeof NAV)[number];
 
-/* ─── SKILLS  (fixed: SiPostman→SiShopify for E-commerce, SiReact→SiAndroid for Mobile) ─── */
+/* ─── SKILLS WITH AUTHENTIC BRAND COLORS ─── */
 export const SKILLS: Skill[] = [
-  { name: "Web Design",       icon: SiFigma,         cat: "Creative"    },
-  { name: "Development",      icon: SiNextdotjs,     cat: "Fullstack"   },
-  { name: "SEO Optimization", icon: HiSparkles,      cat: "Performance" },
-  { name: "Python",           icon: SiPython,        cat: "Backend"     },
-  { name: "React / Next.js",  icon: SiReact,         cat: "Frontend"    },
-  { name: "Mobile Apps",      icon: SiAndroid,       cat: "Hybrid"      },
-  { name: "E-commerce",       icon: SiShopify,       cat: "Solutions"   },
-  { name: "Cloud & DevOps",   icon: SiGithubactions, cat: "Deployment"  },
-  { name: "Maintenance",      icon: HiScissors,      cat: "Support"     },
-  { name: "Consulting",       icon: HiSparkles,      cat: "Strategy"    },
+  { name: "Web Design",       icon: SiFigma,         cat: "Creative",    brandColor: "#F24E1E" },
+  { name: "Development",      icon: SiNextdotjs,     cat: "Fullstack",   brandColor: "#000000" },
+  { name: "SEO Optimization", icon: HiSparkles,      cat: "Performance", brandColor: "#F59E0B" },
+  { name: "Python",           icon: SiPython,        cat: "Backend",     brandColor: "#3776AB" },
+  { name: "React / Next.js",  icon: SiReact,         cat: "Frontend",    brandColor: "#61DAFB" },
+  { name: "Mobile Apps",      icon: SiAndroid,       cat: "Hybrid",      brandColor: "#3DDC84" },
+  { name: "E-commerce",       icon: SiShopify,       cat: "Solutions",   brandColor: "#96BF48" },
+  { name: "Cloud & DevOps",   icon: SiGithubactions, cat: "Deployment",  brandColor: "#2088FF" },
+  { name: "Maintenance",      icon: HiScissors,      cat: "Support",     brandColor: "#EC4899" },
+  { name: "Consulting",       icon: HiSparkles,      cat: "Strategy",    brandColor: "#A855F7" },
 ];
 
-/* ─── TECH STACK (previously imported but never displayed) ─── */
+/* ─── TECH STACK WITH VIBRANT LOGO COLORS ─── */
 export const TECHSTACK: TechItem[] = [
-  { name: "JavaScript", icon: SiJavascript   },
-  { name: "TypeScript", icon: SiTypescript   },
-  { name: "React",      icon: SiReact        },
-  { name: "Next.js",    icon: SiNextdotjs    },
-  { name: "Node.js",    icon: SiNodedotjs    },
-  { name: "Python",     icon: SiPython       },
-  { name: "PostgreSQL", icon: SiPostgresql   },
-  { name: "MongoDB",    icon: SiMongodb      },
-  { name: "Tailwind",   icon: SiTailwindcss  },
-  { name: "CI/CD",      icon: SiGithubactions},
+  { name: "JavaScript", icon: SiJavascript,    brandColor: "#F7DF1E" },
+  { name: "TypeScript", icon: SiTypescript,    brandColor: "#3178C6" },
+  { name: "React",      icon: SiReact,         brandColor: "#61DAFB" },
+  { name: "Next.js",    icon: SiNextdotjs,     brandColor: "#000000" },
+  { name: "Node.js",    icon: SiNodedotjs,     brandColor: "#5FA04E" },
+  { name: "Python",     icon: SiPython,        brandColor: "#3776AB" },
+  { name: "PostgreSQL", icon: SiPostgresql,    brandColor: "#4169E1" },
+  { name: "MongoDB",    icon: SiMongodb,       brandColor: "#47A248" },
+  { name: "Tailwind",   icon: SiTailwindcss,   brandColor: "#06B6D4" },
+  { name: "CI/CD",      icon: SiGithubactions, brandColor: "#2088FF" },
 ];
 
 /* ─── EXPERIENCE ─── */
@@ -108,7 +158,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
 ];
 
-/* ─── PROJECTS (added url + github fields; ↗ arrow now clickable when url present) ─── */
+/* ─── PROJECTS (Tailored color palettes) ─── */
 export const PROJECTS: ProjectItem[] = [
   {
     name: "Goldifii",
@@ -117,8 +167,14 @@ export const PROJECTS: ProjectItem[] = [
     desc: "Multi-tenant gold loan lender SaaS — web + mobile. Built core React modules, integrated REST APIs, managed CI/CD pipeline. Live in production.",
     tags: ["React", "React Native", "REST API", "CI/CD", "Cloud Deploy"],
     status: "Live",
-    url: "https://goldifii.com",      // ← update if the live URL differs
+    url: "https://goldifii.com",
     github: null,
+    accent: "#3B82F6",
+    badgeTheme: {
+      bg: "bg-blue-500/10",
+      text: "text-blue-600",
+      border: "border-blue-500/25",
+    },
   },
   {
     name: "codewildlearn",
@@ -127,8 +183,14 @@ export const PROJECTS: ProjectItem[] = [
     desc: "Company learning platform — partnered for deployment, build error resolution, and SEO optimizations.",
     tags: ["Next.js", "SEO", "Analytics", "VPS", "Tailwind"],
     status: "Live",
-    url: "https://codewildlearn.com", // ← update if the live URL differs
+    url: "https://codewildlearn.com",
     github: null,
+    accent: "#10B981",
+    badgeTheme: {
+      bg: "bg-emerald-500/10",
+      text: "text-emerald-600",
+      border: "border-emerald-500/25",
+    },
   },
   {
     name: "Tourism Platform",
@@ -137,8 +199,14 @@ export const PROJECTS: ProjectItem[] = [
     desc: "A comprehensive travel & tourism platform — packages, booking flow, and SEO optimization. Mobile-first and high-conversion design.",
     tags: ["Next.js", "SEO", "Booking", "Tailwind"],
     status: "Live",
-    url: null,    // private client site — set a URL here if available
+    url: null,
     github: null,
+    accent: "#F59E0B",
+    badgeTheme: {
+      bg: "bg-amber-500/10",
+      text: "text-amber-600",
+      border: "border-amber-500/25",
+    },
   },
   {
     name: "Cinematic Portfolio",
@@ -147,8 +215,14 @@ export const PROJECTS: ProjectItem[] = [
     desc: "High-end photography portfolio — masonry gallery, optimized assets, and smooth transitions.",
     tags: ["React", "Framer Motion", "SEO", "CSS"],
     status: "Live",
-    url: null,    // private client site — set a URL here if available
+    url: null,
     github: null,
+    accent: "#A855F7",
+    badgeTheme: {
+      bg: "bg-purple-500/10",
+      text: "text-purple-600",
+      border: "border-purple-500/25",
+    },
   },
 ];
 

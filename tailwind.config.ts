@@ -9,6 +9,8 @@ const config: Config = {
         mono:    ["'JetBrains Mono'","monospace"],
       },
       colors: {
+        accent: "var(--acc)",
+        "accent-glow": "var(--acc-glow)",
         orange: { 400:"#FF8833", 500:"#FF5500", 600:"#E04800" },
       },
     },

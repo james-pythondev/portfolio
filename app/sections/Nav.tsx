@@ -1,15 +1,38 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV, SOCIALS } from "@/lib/data";
+import { NAV, SOCIALS, ACCENT_THEMES } from "@/lib/data";
 
 interface NavProps {
   active: string;
 }
 
 export default function Nav({ active }: NavProps) {
-  const [menu, setMenu]       = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [menu, setMenu]             = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
+  const [activeTheme, setActiveTheme] = useState("orange");
+
+  // Load saved accent theme or default to orange
+  useEffect(() => {
+    const saved = localStorage.getItem("portfolio-accent");
+    if (saved) {
+      const match = ACCENT_THEMES.find((t) => t.id === saved);
+      if (match) {
+        setActiveTheme(match.id);
+        document.documentElement.style.setProperty("--acc", match.color);
+        document.documentElement.style.setProperty("--acc-glow", match.glow);
+      }
+    }
+  }, []);
+
+  const handleThemeChange = (id: string) => {
+    const match = ACCENT_THEMES.find((t) => t.id === id);
+    if (!match) return;
+    setActiveTheme(match.id);
+    localStorage.setItem("portfolio-accent", match.id);
+    document.documentElement.style.setProperty("--acc", match.color);
+    document.documentElement.style.setProperty("--acc-glow", match.glow);
+  };
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -27,7 +50,7 @@ export default function Nav({ active }: NavProps) {
       {/* ── Fixed top bar ── */}
       <nav
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-          scrolled ? "bg-[#e8e8e8]/80" : "bg-transparent"
+          scrolled ? "bg-[#e8e8e8]/85" : "bg-transparent"
         }`}
         style={{ backdropFilter: scrolled ? "blur(24px)" : "none" }}
       >
@@ -57,8 +80,8 @@ export default function Nav({ active }: NavProps) {
               <button
                 key={l}
                 onClick={() => go(l)}
-                className={`text-[11px] uppercase tracking-[0.35em] font-semibold transition-all duration-300 hover:text-[#F05033] ${
-                  active === l ? "text-[#F05033]" : "text-black/40"
+                className={`text-[11px] uppercase tracking-[0.35em] font-semibold transition-all duration-300 hover:text-accent ${
+                  active === l ? "text-accent" : "text-black/40"
                 }`}
               >
                 {l}
@@ -66,9 +89,36 @@ export default function Nav({ active }: NavProps) {
             ))}
           </div>
 
-          {/* Social icons + Resume CTA */}
-          <div className="flex items-center gap-4">
+          {/* Right controls: Theme Switcher + Socials + Resume CTA */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Color Accent Switcher */}
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-black/10 bg-black/[0.03] backdrop-blur-sm">
+              {ACCENT_THEMES.map((theme) => {
+                const isSelected = activeTheme === theme.id;
+                return (
+                  <button
+                    key={theme.id}
+                    onClick={() => handleThemeChange(theme.id)}
+                    aria-label={`Select ${theme.name} theme`}
+                    title={`Theme: ${theme.name}`}
+                    className="relative w-4 h-4 rounded-full flex items-center justify-center transition-transform hover:scale-125 focus:outline-none"
+                    style={{ backgroundColor: theme.color }}
+                  >
+                    {isSelected && (
+                      <motion.span
+                        layoutId="activeThemeDot"
+                        className="absolute inset-[-3px] rounded-full border-2 border-black/60 pointer-events-none"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Social icons — desktop */}
             <div className="hidden lg:flex items-center gap-3">
+              <div className="w-px h-5 bg-black/15 mx-1" />
               {SOCIALS.map((s) => (
                 <a
                   key={s.label}
@@ -83,14 +133,13 @@ export default function Nav({ active }: NavProps) {
                   <s.icon className="text-[16px]" />
                 </a>
               ))}
-              <div className="w-px h-5 bg-black/15 ml-1" />
             </div>
 
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] bg-black text-white px-5 py-2.5 hover:bg-[#F05033] transition-colors duration-300"
+              className="hidden md:inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] bg-black text-white px-5 py-2.5 hover:bg-accent transition-colors duration-300"
             >
               Resume
             </a>
@@ -140,12 +189,33 @@ export default function Nav({ active }: NavProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 + 0.1 }}
                 onClick={() => go(l)}
-                className="font-black text-4xl sm:text-5xl md:text-7xl tracking-tighter uppercase text-black hover:italic hover:text-[#F05033] transition-all"
+                className="font-black text-4xl sm:text-5xl md:text-7xl tracking-tighter uppercase text-black hover:italic hover:text-accent transition-all"
                 style={{ fontFamily: "var(--font-display, sans-serif)" }}
               >
                 {l}
               </motion.button>
             ))}
+
+            {/* Color Accent Switcher in mobile menu */}
+            <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-black/10 bg-black/5">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-black/40">Theme:</span>
+              {ACCENT_THEMES.map((theme) => {
+                const isSelected = activeTheme === theme.id;
+                return (
+                  <button
+                    key={theme.id}
+                    onClick={() => handleThemeChange(theme.id)}
+                    aria-label={`Select ${theme.name} theme`}
+                    className="relative w-5 h-5 rounded-full flex items-center justify-center transition-transform hover:scale-125"
+                    style={{ backgroundColor: theme.color }}
+                  >
+                    {isSelected && (
+                      <span className="absolute inset-[-3px] rounded-full border-2 border-black/60 pointer-events-none" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
 
             {/* Bottom: socials + resume */}
             <div className="absolute bottom-10 left-0 right-0 flex flex-col items-center gap-5">

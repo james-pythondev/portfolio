@@ -57,9 +57,15 @@ export default function Hero() {
             }}
           />
 
+          {/* Ambient radial lighting glow behind portrait */}
+          <div
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[300px] sm:w-[460px] h-[300px] sm:h-[460px] rounded-full blur-[90px] opacity-45 pointer-events-none transition-all duration-700"
+            style={{ background: "radial-gradient(circle, var(--acc-glow) 0%, transparent 75%)" }}
+          />
+
           {/* Available badge */}
           <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-20 flex items-center gap-2 border border-black bg-[#E6E6E6] px-3 py-1.5 sm:px-4 sm:py-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F05033] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.4em]">Available</span>
           </div>
 
@@ -91,7 +97,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[11px] font-bold uppercase tracking-[0.5em] text-[#F05033] mb-5"
+              className="text-[11px] font-bold uppercase tracking-[0.5em] text-accent mb-5"
             >
               {"// Full Stack Developer"}
             </motion.p>

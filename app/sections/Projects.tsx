@@ -18,7 +18,7 @@ export default function Projects() {
       <div className="max-w-[1340px] mx-auto">
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-10 mb-16">
-          <span className="text-[11px] font-bold uppercase tracking-[0.45em] text-[#F05033]">
+          <span className="text-[11px] font-bold uppercase tracking-[0.45em] text-accent">
             {"// Folio"}
           </span>
           <h2
@@ -53,22 +53,30 @@ export default function Projects() {
               <TiltCard key={p.name}>
                 <Wrapper>
                   <div
-                    className={`group bg-[#E6E6E6] border border-black p-5 sm:p-10 md:p-14 min-h-[280px] sm:min-h-[440px] flex flex-col justify-between transition-colors h-full ${
+                    className={`group bg-[#E6E6E6] border border-black p-5 sm:p-10 md:p-14 min-h-[280px] sm:min-h-[440px] flex flex-col justify-between transition-all duration-300 h-full relative overflow-hidden ${
                       hasLink
                         ? "cursor-pointer hover-target hover:bg-white"
                         : "cursor-default hover:bg-white"
                     }`}
                   >
+                    {/* Subtle top edge gradient matching project theme */}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ backgroundColor: p.accent }}
+                    />
+
                     {/* Top row */}
                     <div className="flex items-start justify-between mb-10">
-                      <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/40">
+                      <span
+                        className={`text-[9px] font-bold uppercase tracking-[0.3em] px-3 py-1 border transition-colors ${p.badgeTheme.bg} ${p.badgeTheme.text} ${p.badgeTheme.border}`}
+                      >
                         {p.label}
                       </span>
-                      {/* ↗ arrow — only interactive when a URL is set */}
+                      {/* ↗ arrow */}
                       <div
                         className={`w-10 h-10 border border-black flex items-center justify-center text-sm transition-all duration-300 ${
                           hasLink
-                            ? "group-hover:bg-[#F05033] group-hover:border-[#F05033] group-hover:text-white"
+                            ? "group-hover:bg-accent group-hover:border-accent group-hover:text-white group-hover:shadow-md"
                             : "opacity-25"
                         }`}
                       >
@@ -88,7 +96,6 @@ export default function Projects() {
                         >
                           {p.status}
                         </span>
-                        {/* "Private" badge shown when no public URL */}
                         {!hasLink && (
                           <span className="text-[8px] font-bold uppercase tracking-widest px-2 py-1 border border-black/20 text-black/30">
                             Private
@@ -98,7 +105,7 @@ export default function Projects() {
 
                       <h3
                         className={`font-black text-3xl sm:text-4xl md:text-5xl text-black tracking-tighter leading-none mb-3 sm:mb-4 transition-colors ${
-                          hasLink ? "group-hover:text-[#F05033]" : ""
+                          hasLink ? "group-hover:text-accent" : ""
                         }`}
                         style={{ fontFamily: "var(--font-display, sans-serif)" }}
                       >
@@ -113,7 +120,7 @@ export default function Projects() {
                         {p.tags.slice(0, 3).map((t) => (
                           <span
                             key={t}
-                            className="text-[9px] font-semibold uppercase tracking-widest bg-black/6 px-3 py-1.5 text-black/60"
+                            className="text-[9px] font-semibold uppercase tracking-widest bg-black/6 group-hover:bg-black/10 px-3 py-1.5 text-black/60 transition-colors"
                           >
                             {t}
                           </span>
